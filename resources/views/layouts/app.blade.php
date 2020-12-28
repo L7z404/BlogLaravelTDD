@@ -49,7 +49,7 @@
 
                         <div class="navbar-brand">
                             <a href="https://mobirise.com" class="navbar-logo"><img
-                                    src="assets/images/img-laravel-128x128.png" alt="Mobirise"></a>
+                                    src="{{ asset('assets/images/img-laravel-128x128.png') }}" alt="Mobirise"></a>
                             <a class="navbar-caption text-white" href="https://mobirise.com">BLOGLARAVEL</a>
                         </div>
 
@@ -63,7 +63,7 @@
 
                         <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm"
                             id="exCollapsingNavbar">
-                            <li class="nav-item"><a class="nav-link link" href="https://mobirise.com/">INICIO</a></li>
+                            <li class="nav-item"><a class="nav-link link" href='{{ route('welcome') }}'>INICIO</a></li>
                             <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle"
                                     data-toggle="dropdown-submenu" href="https://mobirise.com/"
                                     aria-expanded="false">TEMAS PRINCIPALES</a>
@@ -74,18 +74,50 @@
                                             data-toggle="dropdown-submenu" href="https://mobirise.com/">Trendy
                                             blocks</a>
                                         <div class="dropdown-menu dropdown-submenu"><a class="dropdown-item"
-                                                href="https://mobirise.com/">Image/content slider</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Contact forms</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Image gallery</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Mobile menu</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Google maps</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Social buttons</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Google fonts</a><a
-                                                class="dropdown-item" href="https://mobirise.com/">Video background</a>
+                                                href="https://mobirise.com/">Image/content slider</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Contact forms</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Image gallery</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Mobile menu</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Google maps</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Social buttons</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Google fonts</a>
+                                                <a class="dropdown-item" href="https://mobirise.com/">Video background</a>
                                         </div>
-                                    </div><a class="dropdown-item" href="https://mobirise.com/">Host anywhere</a>
+                                    </div>
+                                    <a class="dropdown-item" href="https://mobirise.com/">Host anywhere</a>
                                 </div>
                             </li>
+
+                            {{--  Sistema Autenticación  --}}
+                            @guest
+                            <li class="nav-item">
+                                <a class="nav-link link" href="#" data-toggle="modal" data-target="#loginModal">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+
                         </ul>
                         <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse"
                             data-target="#exCollapsingNavbar">
@@ -130,8 +162,11 @@
 
 
     {{-- Mio --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('include-login-modal')
     {{-- Mio --}}
+
     <input name="animation" type="hidden">
     <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i
                 class="mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>

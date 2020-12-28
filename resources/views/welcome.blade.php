@@ -421,7 +421,7 @@
                                         <p>Mobirise is perfect for non-techies who are not familiar with the intricacies of
                                             web development and for designers who prefer to work as visually as possible,
                                             without fighting with code. Also great for pro-coders for fast prototyping and
-                                            small customers' projects.</p>
+                                            small customers projects.</p>
                                     </div>
                                 </div>
                             </div>
@@ -436,9 +436,9 @@
                                     aria-labelledby="headingThree">
                                     <div class="panel-body lead">
                                         <p>Key differences from traditional builders:<br>* Minimalistic, extremely
-                                            <strong>easy-to-use</strong> interface<br>*
-                                            <strong>Mobile</strong>-friendliness, latest website blocks and techniques
-                                            "out-the-box"<br>* <strong>Free</strong> for commercial and non-profit use</p>
+                                            <strong>"easy-to-use"</strong> interface<br>*
+                                            <strong>"Mobile"</strong>"-friendliness, latest website blocks and techniques"
+                                            "out-the-box"<br>* <strong>"Free"</strong>"for commercial and non-profit use "</p>
                                     </div>
                                 </div>
                             </div>
@@ -451,4 +451,11 @@
             </div>
         </div>
     </section>
+    @include('includes.login-modal')
 @endsection
+
+@if($errors->any())
+    @section('include-login-modal')
+            <script src="{{ asset('js/login-modal.js') }}"> </script>
+    @endsection
+@endif

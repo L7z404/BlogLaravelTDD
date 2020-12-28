@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div style="margin-top: 150px; margin-bottom: 100px" class="row justify-content-center">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('registro-formulario.Register') }}</div>
 
