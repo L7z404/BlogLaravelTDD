@@ -27,4 +27,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    //$user->$themes
+    public function themes(){
+        return $this->hasMany(Theme::class);
+    }
+    
+    public function articles(){
+        return $this->hasMany(Article::class);
+    }
 }
